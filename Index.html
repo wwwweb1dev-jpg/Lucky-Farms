@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Farms - Premium Livestock Investment</title>
+    <!-- Paystack Inline SDK -->
+    <script src="https://js.paystack.co/v2/inline.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --secondary: #f57c00;
+            --dark: #212121;
+            --light: #f4f6f4;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-dashboard {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-dashboard:hover {
+            background: #e65100;
+        }
+
+        .btn-invest {
+            background: var(--primary);
+            color: var(--white);
+            width: 100%;
+        }
+
+        .btn-invest:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.95) 0%, rgba(27, 94, 32, 0.98) 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            opacity: 0.9;
+        }
+
+        .rules-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Marketplace Section */
+        .marketplace {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        /* Animal Grid & Cards */
+        .animal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .animal-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .animal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .stats-box {
+            background: #f1f8e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .stats-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-row span {
+            color: #555;
+        }
+
+        .stats-row b {
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #999;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            font-size: 14px;
+            border-top: 4px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">🍀 Lucky Farms</a>
+            <!-- Link pointing to the dashboard page we will build next -->
+            <a href="Dashboard poultry.html" class="btn btn-dashboard">Go to Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- Hero Introduction -->
+    <header class="hero">
+        <h1>Invest in Verified Domestic Livestock</h1>
+        <p>Support local farming, buy real livestock shares, and earn steady monthly returns on your capital.</p>
+        <div class="rules-badge">🔒 Standard Policy: Minimum withdrawal threshold set to 3x your total invested money</div>
+    </header>
+
+    <!-- Marketplace -->
+    <main class="marketplace">
+        <div class="section-title">
+            <h2>Our Domestic Animals</h2>
+            <p>Select any domestic livestock unit below to complete your investment instantly through Paystack.</p>
+        </div>
+
+        <div class="animal-grid">
+            
+            <!-- Snails (GH₵ 70) -->
+            <div class="animal-card">
+                <img src="https://source.unsplash.com/600x400/?snail" alt="Random Snail">
+                <div class="card-body">
+                    <h3>Snail Nest Unit</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 70</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 210 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Snail Nest Unit', 70)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Fowl/Poultry (GH₵ 100) -->
+            <div class="animal-card">
+                <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80" alt="Poultry Fowl" class="animal-image">
+                <div class="card-body">
+                    <h3>Domestic Fowl (Poultry)</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 100.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 300 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Domestic Fowl (Poultry)', 100)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Ducks (GH₵ 120) -->
+            <div class="animal-card">
+                <img src="https://random-d.uk/api/randomimg" alt="Random Duck">
+                <div class="card-body">
+                    <h3>Domestic Duck Coop</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 120.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 360 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Domestic Duck Coop', 120)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Rabbits (GH₵ 200) -->
+            <div class="animal-card">
+                <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=600&q=80" alt="Rabbits" class="animal-image">
+                <div class="card-body">
+                    <h3>Rabbitry Colony</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 200.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 600 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Rabbitry Colony', 200)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Guinea Fowl (GH₵ 250) -->
+            <div class="animal-card">
+                <img src="https://source.unsplash.com/600x400/?guinea-fowl,bird" alt="Random Guinea Fowl">
+                <div class="card-body">
+                    <h3>Guinea Fowl Pen</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 250.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 750 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Guinea Fowl Pen', 250)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Turkeys (GH₵ 300) -->
+            <div class="animal-card">
+                <img src="https://source.unsplash.com/600x400/?turkey,bird" alt="Random Turkey">
+                <div class="card-body">
+                    <h3>Turkey Brooder</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 300.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 900 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Turkey Brooder', 300)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Pigs (GH₵ 400) -->
+            <div class="animal-card">
+                <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=600&q=80" alt="Weaner Pig" class="animal-image" style="display:none;" onload="this.style.display='block'">
+                <!-- Fallback to a solid pig image -->
+                
+                <div class="card-body">
+                    <h3>Weaner Pig Unit</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 400.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 1,200 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Weaner Pig Unit', 400)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Sheep (GH₵ 450) -->
+            <div class="animal-card">
+                <img src="https://source.unsplash.com/600x400/?sheep" alt="Random Sheep">
+                <div class="card-body">
+                    <h3>Sheep Breeding Unit</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 450.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 1,350 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Sheep Breeding Unit', 450)">Invest Now</button>
+                </div>
+            </div>
+
+            <!-- Goats (GH₵ 500) -->
+            <div class="animal-card">
+                <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=600&q=80" alt="Goat" class="animal-image">
+                <div class="card-body">
+                    <h3>Breeding Goat</h3>
+                    <div class="stats-box">
+                        <div class="stats-row"><span>Investment:</span><b>GH₵ 500.00</b></div>
+                        <div class="stats-row"><span>Monthly Return:</span><b>GH₵ 1,500 / mo</b></div>
+                    </div>
+                    <button class="btn btn-invest" onclick="processPayment('Breeding Goat', 500)">Invest Now</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Lucky Farms Ghana. Real animal husbandry with verified, secure digital infrastructure powered by Paystack.</p>
+    </footer>
+
+    <script>
+        const API_BASE = "http://localhost:3000/api";
+
+        function processPayment(animalName, amountGHS) {
+            // Prompt user for their email since there is no login/signup requirement
+            const emailInput = prompt("Please enter your email address to link to this livestock investment:", "investor@example.com");
+            
+            if (!emailInput || emailInput.trim() === "" || !emailInput.includes("@")) {
+                alert("A valid email address is required to process and record your purchase.");
+                return;
+            }
+
+            const cleanEmail = emailInput.trim().toLowerCase();
+
+            // Store the email in browser memory so the dashboard can fetch their data immediately
+            localStorage.setItem('currentInvestorEmail', cleanEmail);
+
+            const popup = new PaystackPop();
+            popup.newTransaction({
+                key: 'pk_test_21c37fcaefee476895d4a4b753233653d28a8874', // Swap this placeholder with your real key
+                email: cleanEmail,
+                amount: amountGHS * 100, // Convert to Ghana Pesewas
+                currency: 'GHS',
+                metadata: {
+                    custom_fields: [{
+                        display_name: "Animal Purchased",
+                        variable_name: "animal_purchased",
+                        value: animalName
+                    }]
+                },
+                onSuccess: function(response) {
+                    // Send transaction records to our backend
+                    fetch(`${API_BASE}/verify-payment`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            reference: response.reference,
+                            email: cleanEmail,
+                            plan: animalName,
+                            amount: amountGHS
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert(`Congratulations! You have successfully invested in the ${animalName}.`);
+                        // Auto-forward to the dashboard to view the transaction ledger!
+                        window.location.href = 'dashboard.html';
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert("Payment recorded by Paystack, but failed to reach the database server. Please make sure the backend is running.");
+                    });
+                },
+                onCancel: function() {
+                    alert("Payment transaction was cancelled.");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
