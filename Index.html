@@ -389,12 +389,12 @@
 
             const cleanEmail = emailInput.trim().toLowerCase();
 
-            // Store the email in browser memory so the dashboard can fetch their data immediately
+            
             localStorage.setItem('currentInvestorEmail', cleanEmail);
 
             const popup = new PaystackPop();
             popup.newTransaction({
-                key: 'pk_test_21c37fcaefee476895d4a4b753233653d28a8874', // Swap this placeholder with your real key
+                key: 'pk_test_21c37fcaefee476895d4a4b753233653d28a8874',
                 email: cleanEmail,
                 amount: amountGHS * 100, // Convert to Ghana Pesewas
                 currency: 'GHS',
